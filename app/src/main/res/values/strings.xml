@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Money</string>
+
+    <!-- Menu Items -->
+    <string name="update_contact_list">Update Contacts</string>
+    <string name="reset_everything">Reset</string>
+</resources>
