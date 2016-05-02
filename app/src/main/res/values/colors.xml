@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <!--Blue-->
+    <!--<color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>-->
+
+    <!--Dark Pink-->
+    <color name="colorPrimary">#F50057</color>
+    <color name="colorPrimaryDark">#C51162</color>
+
+    <!--Green-->
+    <!--<color name="colorPrimary">#00CA52</color>
+    <color name="colorPrimaryDark">#00A542</color>-->
+
+    <!--Dark Blue-->
+    <!--<color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>-->
+
     <color name="colorAccent">#FF4081</color>
 
 

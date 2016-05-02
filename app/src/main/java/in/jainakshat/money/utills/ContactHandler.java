@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class ContactHandler {
 
         ContactTable.deleteAllRows(DBHelper.getInstance(context));
 
-        Cursor c = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" ASC");
+        Cursor c = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" DESC");
         c.moveToFirst();
         String last_read_name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
         while(c.moveToNext()) {
@@ -29,7 +30,7 @@ public class ContactHandler {
                 String name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 String number = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 String id = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
-                if(last_read_name.equals(name)) {
+                if((last_read_name.equals(name)) || (isNumeric(name))) {
                     continue;
                 }
                 else {
@@ -38,12 +39,17 @@ public class ContactHandler {
                     contact.setType_id(id);
                     contact.setName(name);
                     contact.setNumber(number);
-                    if(name.length()%2 == 0) contact.setNet_value("-25");
-                    else if(name.length()%3 == 0) contact.setNet_value("25");
-                    else contact.setNet_value("0");
+                    contact.setNet_value("0");
+                    contact.setTimestamp(String.valueOf(System.currentTimeMillis()));
                     ContactTable.insert(DBHelper.getInstance(context), contact);
                 }
             }
         }
     }
+
+    public static boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");
+    }
+
 }

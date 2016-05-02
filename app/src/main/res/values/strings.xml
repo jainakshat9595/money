@@ -4,4 +4,6 @@
     <!-- Menu Items -->
     <string name="update_contact_list">Update Contacts</string>
     <string name="reset_everything">Reset</string>
+    <string name="net_value">Net Value</string>
+
 </resources>
