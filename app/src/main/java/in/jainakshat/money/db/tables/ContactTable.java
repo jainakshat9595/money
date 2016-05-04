@@ -25,6 +25,7 @@ public class ContactTable {
     public static final String COLUMN_NUMBER= "number";
     public static final String COLUMN_NET_VALUE= "netvalue";
     public static final String COLUMN_TIMESTAMP= "timestamp";
+    public static final String COLUMN_TIMESTAMP_CREATED= "timestamp_created";
     public static final String COLUMN_NAME_NULLABLE = "dummy";
 
     // Database creation SQL statement
@@ -34,14 +35,16 @@ public class ContactTable {
             + COLUMN_TYPE_ID + " VARCHAR(5) PRIMARY KEY,"
             + COLUMN_NAME + " VARCHAR(30) NOT NULL,"
             + COLUMN_NUMBER + " VARCHAR(15) NOT NULL,"
-            + COLUMN_TIMESTAMP + " VARCHAR(50) NOT NULL,"
-            + COLUMN_NET_VALUE + " VARCHAR(4) NOT NULL"
+            + COLUMN_TIMESTAMP + " VARCHAR(20) NOT NULL,"
+            + COLUMN_NET_VALUE + " VARCHAR(4) NOT NULL,"
+            + COLUMN_TIMESTAMP_CREATED + " VARCHAR(20) NOT NULL"
             + ");";
 
     // Database select all SQL statement
     private static final String SELECT_ALL_CONVERSION = "SELECT " +
             "* " +
-            "FROM " + ContactTable.TABLE_CONVERSION + ";" ;
+            "FROM " + ContactTable.TABLE_CONVERSION + " " +
+            "ORDER BY "+COLUMN_TIMESTAMP+" DESC;";
 
     // Database delete all SQL statement
     private static final String DELETE_ALL_ROWS = "DELETE " +
@@ -81,6 +84,7 @@ public class ContactTable {
         values.put(COLUMN_NUMBER, contact.getNumber());
         values.put(COLUMN_NET_VALUE, contact.getNet_value());
         values.put(COLUMN_TIMESTAMP, contact.getTimestamp());
+        values.put(COLUMN_TIMESTAMP_CREATED, contact.getTimestamp_created());
 
         getDatabase(dbHelper).replace(TABLE_CONVERSION, COLUMN_NAME_NULLABLE, values);
     }
@@ -100,6 +104,7 @@ public class ContactTable {
                 contact.setNumber(cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN_NUMBER)));
                 contact.setNet_value(cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN_NET_VALUE)));
                 contact.setTimestamp(cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN_TIMESTAMP)));
+                contact.setTimestamp_created(cursor.getString(cursor.getColumnIndex(ContactTable.COLUMN_TIMESTAMP_CREATED)));
 
                 contacts.add(contact);
 
@@ -118,10 +123,16 @@ public class ContactTable {
 
     }
 
-    public static void updateNetValueInDatabase(SQLiteOpenHelper dbHelper, String typeid, int net_value) {
+    public static void updateNetValueInDatabase(SQLiteOpenHelper dbHelper, String typeid, int net_value, boolean isReset, String timestamp_created) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NET_VALUE, String.valueOf(net_value));
-        values.put(COLUMN_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
+        if(isReset) {
+            values.put(COLUMN_TIMESTAMP, timestamp_created);
+        }
+        else {
+            values.put(COLUMN_TIMESTAMP, String.valueOf(System.currentTimeMillis()));
+        }
+
 
         String WHERE_CLAUSE = COLUMN_TYPE_ID+"='"+typeid+"'";
 

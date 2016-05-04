@@ -23,11 +23,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import in.jainakshat.money.R;
 import in.jainakshat.money.db.DBHelper;
 import in.jainakshat.money.db.models.ContactModel;
+import in.jainakshat.money.db.models.HistoryModel;
 import in.jainakshat.money.db.tables.ContactTable;
+import in.jainakshat.money.db.tables.HistoryTable;
 import in.jainakshat.money.preferencesmanager.MoneyPreferenceManager;
 import in.jainakshat.money.transactionhistoryactivity.TransactionHistoryActivity;
 import in.jainakshat.money.utills.ContactHandler;
@@ -72,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.main_contacts_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         mRecyclerViewAdapter = new ContactsAdapter(getBaseContext());
-        Collections.sort(mContacts_array, new Comparator<ContactModel>() {
+        /*Collections.sort(mContacts_array, new Comparator<ContactModel>() {
             @Override
             public int compare(ContactModel o1, ContactModel o2) {
-                return (int)(Long.parseLong(o2.getTimestamp()) - Long.parseLong(o1.getTimestamp()));
+                return (int)(Long.parseLong(o1.getTimestamp()) - Long.parseLong(o2.getTimestamp()));
             }
-        });
+        });*/
         mRecyclerViewAdapter.setData(mContacts_array);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
 
@@ -119,12 +122,12 @@ public class MainActivity extends AppCompatActivity {
                         filteredList.add(contact);
                     }
                 }
-                Collections.sort(filteredList, new Comparator<ContactModel>() {
+                /*Collections.sort(filteredList, new Comparator<ContactModel>() {
                     @Override
                     public int compare(ContactModel o1, ContactModel o2) {
-                        return (int)(Long.parseLong(o2.getTimestamp()) - Long.parseLong(o1.getTimestamp()));
+                        return (int)(Long.parseLong(o1.getTimestamp()) - Long.parseLong(o2.getTimestamp()));
                     }
-                });
+                });*/
                 mRecyclerViewAdapter.setData(filteredList);
                 mRecyclerViewAdapter.notifyDataSetChanged();  // data set changed
                 return true;
@@ -180,6 +183,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        mContacts_array = ContactTable.getContacts(DBHelper.getInstance(getBaseContext()));
+        mRecyclerViewAdapter.setData(mContacts_array);
+        mRecyclerViewAdapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -213,14 +224,28 @@ public class MainActivity extends AppCompatActivity {
             case "Take":
                 int n_value_1 = Integer.parseInt(contactModel.getNet_value());
                 n_value_1 = n_value_1 + Integer.parseInt(amount);
-                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_1);
-                //addTransactionRecordInDatabase();
+                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_1, false, null);
+                HistoryModel historyModel_1 = new HistoryModel();
+                historyModel_1.setContact_id(contactModel.getType_id());
+                historyModel_1.setAmount(amount);
+                historyModel_1.setYear(String.valueOf(new Date().getYear()));
+                historyModel_1.setMonth(String.valueOf(new Date().getMonth()));
+                historyModel_1.setDate(String.valueOf(new Date().getDate()));
+                historyModel_1.setAction("Take");
+                HistoryTable.insert(DBHelper.getInstance(getBaseContext()), historyModel_1);
                 break;
             case "Give":
                 int n_value_2 = Integer.parseInt(contactModel.getNet_value());
                 n_value_2 = n_value_2 - Integer.parseInt(amount);
-                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_2);
-                //addTransactionRecordInDatabase();
+                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_2, false, null);
+                HistoryModel historyModel_2 = new HistoryModel();
+                historyModel_2.setContact_id(contactModel.getType_id());
+                historyModel_2.setAmount(amount);
+                historyModel_2.setYear(String.valueOf(new Date().getYear()));
+                historyModel_2.setMonth(String.valueOf(new Date().getMonth()));
+                historyModel_2.setDate(String.valueOf(new Date().getDate()));
+                historyModel_2.setAction("Give");
+                HistoryTable.insert(DBHelper.getInstance(getBaseContext()), historyModel_2);
                 break;
             case "Settle":
                 int n_value_3 = Integer.parseInt(contactModel.getNet_value());
@@ -233,8 +258,15 @@ public class MainActivity extends AppCompatActivity {
                             .setAction("Action", null).show();
                     break;
                 }
-                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_3);
-                //addTransactionRecordInDatabase();
+                ContactTable.updateNetValueInDatabase(DBHelper.getInstance(getBaseContext()), contactModel.getType_id(), n_value_3, false, null);
+                HistoryModel historyModel_3 = new HistoryModel();
+                historyModel_3.setContact_id(contactModel.getType_id());
+                historyModel_3.setAmount(amount);
+                historyModel_3.setYear(String.valueOf(new Date().getYear()));
+                historyModel_3.setMonth(String.valueOf(new Date().getMonth()));
+                historyModel_3.setDate(String.valueOf(new Date().getDate()));
+                historyModel_3.setAction("Settle");
+                HistoryTable.insert(DBHelper.getInstance(getBaseContext()), historyModel_3);
                 break;
 
         }
@@ -244,13 +276,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateAdapterList() {
         mContacts_array = ContactTable.getContacts(DBHelper.getInstance(getBaseContext()));
-        Collections.sort(mContacts_array, new Comparator<ContactModel>() {
+        /*Collections.sort(mContacts_array, new Comparator<ContactModel>() {
             @Override
             public int compare(ContactModel o1, ContactModel o2) {
-                return (int)(Long.parseLong(o2.getTimestamp()) - Long.parseLong(o1.getTimestamp()));
+                return (int)(Long.parseLong(o1.getTimestamp()) - Long.parseLong(o2.getTimestamp()));
             }
-        });
+        });*/
         mRecyclerViewAdapter.setData(mContacts_array);
         mRecyclerViewAdapter.notifyDataSetChanged();
     }
+
 }

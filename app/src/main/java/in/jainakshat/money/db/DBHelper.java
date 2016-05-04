@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import in.jainakshat.money.db.tables.ContactTable;
+import in.jainakshat.money.db.tables.HistoryTable;
 
 
 /**
@@ -47,10 +48,12 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         ContactTable.onCreate(db);
+        HistoryTable.onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         ContactTable.onUpgrade(db, oldVersion, newVersion);
+        HistoryTable.onUpgrade(db, oldVersion, newVersion);
     }
 }

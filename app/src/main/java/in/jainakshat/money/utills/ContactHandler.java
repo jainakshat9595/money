@@ -41,6 +41,7 @@ public class ContactHandler {
                     contact.setNumber(number);
                     contact.setNet_value("0");
                     contact.setTimestamp(String.valueOf(System.currentTimeMillis()));
+                    contact.setTimestamp_created(String.valueOf(System.currentTimeMillis()));
                     ContactTable.insert(DBHelper.getInstance(context), contact);
                 }
             }
