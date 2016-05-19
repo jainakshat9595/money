@@ -31,6 +31,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         private TextView mTextView_th_row_date;
         private TextView mTextView_th_row_amount;
         private TextView mTextView_th_row_tag;
+        private TextView mTextView_th_row_description;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -38,9 +39,11 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             mTextView_th_row_date = (TextView) itemView.findViewById(R.id.th_row_date);
             mTextView_th_row_amount = (TextView) itemView.findViewById(R.id.th_row_amount);
             mTextView_th_row_tag = (TextView) itemView.findViewById(R.id.th_row_tag);
+            mTextView_th_row_description = (TextView) itemView.findViewById(R.id.th_row_description);
             mTextView_th_row_date.setTypeface(karla_font);
             mTextView_th_row_amount.setTypeface(karla_font);
             mTextView_th_row_tag.setTypeface(karla_font);
+            mTextView_th_row_description.setTypeface(karla_font);
         }
     }
 
@@ -65,6 +68,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             holder.mTextView_th_row_tag.setText("Amount settled!");
         }
         holder.mTextView_th_row_date.setText(""+MONTH[Integer.parseInt(mData.get(position).getMonth())]+" "+mData.get(position).getDate()+", "+(Integer.parseInt(mData.get(position).getYear())+1900));
+        holder.mTextView_th_row_description.setText(mData.get(position).getDescription());
     }
 
     @Override

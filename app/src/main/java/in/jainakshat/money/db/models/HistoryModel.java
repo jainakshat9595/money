@@ -14,6 +14,7 @@ public class HistoryModel implements Parcelable {
     private String month;
     private String date;
     private String action;
+    private String description;
 
     public void setContact_id(String contact_id) {
         this.contact_id = contact_id;
@@ -29,6 +30,7 @@ public class HistoryModel implements Parcelable {
     }
     public void setDate(String date) { this.date = date; }
     public void setAction(String action) { this.action = action; }
+    public void setDescription(String description) { this.description = description; }
 
     public String getContact_id() {
         return this.contact_id;
@@ -42,6 +44,7 @@ public class HistoryModel implements Parcelable {
     public String getMonth() { return this.month; }
     public String getDate() { return this.date; }
     public String getAction() { return this.action; }
+    public String getDescription() { return this.description; }
 
     @Override
     public int describeContents() {
@@ -56,6 +59,7 @@ public class HistoryModel implements Parcelable {
         dest.writeString(month);
         dest.writeString(date);
         dest.writeString(action);
+        dest.writeString(description);
 
     }
 
@@ -66,6 +70,7 @@ public class HistoryModel implements Parcelable {
         this.month = in.readString();
         this.date = in.readString();
         this.action = in.readString();
+        this.description = in.readString();
     }
 
     public HistoryModel() {

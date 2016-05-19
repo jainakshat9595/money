@@ -99,6 +99,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
     public void setData(ArrayList<ContactModel> data) {
         this.mData = data;
+        notifyDataSetChanged();
     }
 
     public void setOnItemClickHandler(ItemClickHandler listener) { this.listener = listener; }

@@ -23,4 +23,11 @@
 
     <include layout="@layout/content_main" />
 
+    <RelativeLayout
+        android:id="@+id/loading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_black_1000"
+        android:alpha="0.2"/>
+
 </android.support.design.widget.CoordinatorLayout>

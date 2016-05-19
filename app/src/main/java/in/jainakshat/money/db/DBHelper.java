@@ -14,12 +14,11 @@ import in.jainakshat.money.db.tables.HistoryTable;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "Money_DB";
+    public static final String DATABASE_NAME = "Money_DB";
 
     private static final int DATABASE_VERSION = 1;
 
     private static DBHelper sInstance;
-    private static Context sContext;
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -31,8 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static synchronized DBHelper getInstance(Context context) {
         if (sInstance == null)
-            sContext = context;
-        sInstance = new DBHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
+            sInstance = new DBHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         return sInstance;
     }
 

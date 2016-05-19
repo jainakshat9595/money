@@ -1,0 +1,9 @@
+#Automatically generated header file. Editing this file may cause problems.
+#Thu May 19 17:44:07 IST 2016
+serverVersion=2.5.9
+dexState=NO_CHANGE
+package=in.jainakshat.money
+version=9
+serverVersionCode=70
+dexManagerName=ExtractFromApkDexManager
+appTheme=@style/AppTheme

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="1dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".restoreactivity.RestoreActivity"
+    tools:showIn="@layout/activity_restoredb">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/md_pink_100">
+
+        <TextView
+            android:id="@+id/restore_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:layout_above="@+id/restore_time"
+            android:singleLine="true"
+            android:textSize="65sp"
+            android:textColor="@color/md_black_1000"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/restore_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="20dp"
+            android:textSize="15sp"
+            android:textColor="@color/md_grey_800"
+            android:text=""/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_weight="1"
+        android:background="@color/md_white_1000">
+
+        <TextView
+            android:id="@+id/restore_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textAlignment="center"
+            android:textSize="14dp"
+            android:text="You can restore the backup file into the current database. This will remove your current progress and this action connot be undone."/>
+
+
+        <Button
+            android:id="@+id/restore_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/md_white_1000"
+            android:text="Restore"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

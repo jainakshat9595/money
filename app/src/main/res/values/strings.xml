@@ -4,8 +4,11 @@
     <!-- Menu Items -->
     <string name="update_contact_list">Update Contacts</string>
     <string name="reset_everything">Reset</string>
+    <string name="backup_db">Backup</string>
+    <string name="restore_db">Restore</string>
     <string name="reset_contact">Reset This Contact</string>
     <string name="net_value">Net Value</string>
     <string name="delete_all_th">Delete History</string>
+    <string name="delete_all_backup">Delete All Backups</string>
 
 </resources>

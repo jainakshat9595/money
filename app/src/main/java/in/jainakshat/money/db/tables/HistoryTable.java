@@ -26,6 +26,7 @@ public class HistoryTable {
     public static final String COLUMN_MONTH= "month";
     public static final String COLUMN_DATE= "date";
     public static final String COLUMN_ACTION= "action";
+    public static final String COLUMN_DESCRIPTION= "description";
     public static final String COLUMN_NAME_NULLABLE = "dummy";
 
     // Database creation SQL statement
@@ -37,7 +38,8 @@ public class HistoryTable {
             + COLUMN_YEAR + " VARCHAR(5) NOT NULL,"
             + COLUMN_MONTH + " VARCHAR(15) NOT NULL,"
             + COLUMN_DATE + " VARCHAR(3) NOT NULL,"
-            + COLUMN_ACTION + " VARCHAR(7) NOT NULL"
+            + COLUMN_ACTION + " VARCHAR(7) NOT NULL,"
+            + COLUMN_DESCRIPTION + " VARCHAR(100) NOT NULL"
             + ");";
 
     // Database delete all SQL statement
@@ -79,6 +81,7 @@ public class HistoryTable {
         values.put(COLUMN_MONTH, historyModel.getMonth());
         values.put(COLUMN_DATE, historyModel.getDate());
         values.put(COLUMN_ACTION, historyModel.getAction());
+        values.put(COLUMN_DESCRIPTION, historyModel.getDescription());
 
         getDatabase(dbHelper).replace(TABLE_HISTORY, COLUMN_NAME_NULLABLE, values);
     }
@@ -105,6 +108,7 @@ public class HistoryTable {
                 history.setMonth(cursor.getString(cursor.getColumnIndex(COLUMN_MONTH)));
                 history.setDate(cursor.getString(cursor.getColumnIndex(COLUMN_DATE)));
                 history.setAction(cursor.getString(cursor.getColumnIndex(COLUMN_ACTION)));
+                history.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
 
                 histories.add(history);
 

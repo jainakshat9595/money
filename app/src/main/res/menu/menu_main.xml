@@ -2,14 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".mainactivity.MainActivity">
-    <item
-        android:id="@+id/update_contact_list"
-        android:orderInCategory="100"
-        android:title="@string/update_contact_list"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/reset_everything"
         android:orderInCategory="100"
         android:title="@string/reset_everything"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/backup_db"
+        android:orderInCategory="100"
+        android:title="@string/backup_db"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/restore_db"
+        android:orderInCategory="100"
+        android:title="@string/restore_db"
         app:showAsAction="never" />
 </menu>
