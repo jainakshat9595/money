@@ -11,4 +11,13 @@
     <string name="delete_all_th">Delete History</string>
     <string name="delete_all_backup">Delete All Backups</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    // Google Drive Credentials
+    <string name="google_app_id">801933360476-44fg0jlvaovg2p6kfmvo3sauk2grf1nv.apps.googleusercontent.com</string>
+    <string name="api_key">AIzaSyCKpGNoWCeOMSpLA-ZCY98l9erzu457M9Y</string>
+
 </resources>

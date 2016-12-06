@@ -1,6 +1,10 @@
 package in.jainakshat.money.restoreactivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +28,7 @@ import java.util.Date;
 
 import in.jainakshat.money.R;
 import in.jainakshat.money.db.DBHelper;
+import in.jainakshat.money.mainactivity.MainActivity;
 
 /**
  * Created by Akshat on 5/18/2016.
@@ -95,9 +100,15 @@ public class RestoreActivity extends AppCompatActivity {
                 dst.transferFrom(src, 0, src.size());
                 src.close();
                 dst.close();
-                Snackbar.make(restoreStatus, "Successfully restored! ", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                finish();
+                /*Snackbar.make(restoreStatus, "Successfully restored! Restart App Once to update Changes.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                //finish();
+                Intent mStartActivity = new Intent(getBaseContext(), MainActivity.class);
+                int mPendingIntentId = 123456;
+                PendingIntent mPendingIntent = PendingIntent.getActivity(getBaseContext(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager mgr = (AlarmManager) getBaseContext().getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                System.exit(0);
             }
         }
         catch (Exception e) {

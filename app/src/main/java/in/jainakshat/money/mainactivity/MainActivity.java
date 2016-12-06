@@ -2,16 +2,25 @@ package in.jainakshat.money.mainactivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +33,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.drive.DriveId;
+import com.google.android.gms.drive.OpenFileActivityBuilder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,13 +63,16 @@ import in.jainakshat.money.restoreactivity.RestoreActivity;
 import in.jainakshat.money.transactionhistoryactivity.TransactionHistoryActivity;
 import in.jainakshat.money.utills.ContactHandler;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private MoneyPreferenceManager mPreferenceManager;
 
     private RecyclerView mRecyclerView;
     private ContactsAdapter mRecyclerViewAdapter;
     private SearchView mContactSearchView;
+
+    private DrawerLayout mDrawer;
 
     private LinearLayout mRelativeView_bottom_bar_layout_add;
     private RelativeLayout mRelativeView_bottom_bar_layout_search;
@@ -68,12 +89,29 @@ public class MainActivity extends AppCompatActivity {
 
     private ContactModel selectedContactModel;
 
+    private static final String TAG = "Google Drive Activity";
+    private static final int REQUEST_CODE_RESOLUTION = 1;
+    private static final  int REQUEST_CODE_OPENER = 2;
+    private GoogleApiClient mGoogleApiClient;
+    private boolean fileOperation = false;
+    private DriveId mFileId;
+    public DriveFile file;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         mPreferenceManager = new MoneyPreferenceManager(getBaseContext());
         if(!mPreferenceManager.getContactsUpdated()) {
@@ -192,6 +230,15 @@ public class MainActivity extends AppCompatActivity {
         mContacts_array = ContactTable.getContacts(DBHelper.getInstance(getBaseContext()));
         mRecyclerViewAdapter.setData(mContacts_array);
         super.onResume();
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Drive.API)
+                    .addScope(Drive.SCOPE_FILE)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
+        //mGoogleApiClient.connect();
     }
 
     @Override
@@ -331,4 +378,90 @@ public class MainActivity extends AppCompatActivity {
         mLoadingOverlay.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        /*if (id == R.id.nav_camera) {
+
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }*/
+
+        mDrawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
+        System.out.println("Connected: "+bundle.toString());
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "GoogleApiClient connection suspended");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.i(TAG, "GoogleApiClient connection failed: " + connectionResult.toString());
+
+        if (!connectionResult.hasResolution()) {
+            GoogleApiAvailability.getInstance().getErrorDialog(this, connectionResult.getErrorCode(), 0).show();
+            return;
+        }
+        try {
+            connectionResult.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+        } catch (IntentSender.SendIntentException e) {
+            Log.e(TAG, "Exception while starting resolution activity", e);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_OPENER:
+                if (resultCode == RESULT_OK) {
+                    mFileId = (DriveId) data.getParcelableExtra(
+                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+                    Log.e("file id", mFileId.getResourceId() + "");
+                    String url = "https://drive.google.com/open?id="+ mFileId.getResourceId();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+    }
 }
