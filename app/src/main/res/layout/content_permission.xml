@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="1dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".permissionactivity.PermissionActivity"
+    tools:showIn="@layout/activity_permission">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@color/md_pink_100">
+
+        <TextView
+            android:id="@+id/permission_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_above="@+id/permission_subtext"
+            android:singleLine="true"
+            android:textSize="65sp"
+            android:textColor="@color/md_black_1000"
+            android:layout_centerHorizontal="true"
+            android:text="Money App"/>
+
+        <TextView
+            android:id="@+id/permission_subtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:textSize="15sp"
+            android:textColor="@color/md_grey_800"
+            android:layout_centerHorizontal="true"
+            android:text="Click 'Allow' on the dialogue box that appears. "/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_weight="1"
+        android:background="@color/md_white_1000">
+
+        <TextView
+            android:id="@+id/permission_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textSize="14dp"
+            android:text="Money needs the following permission to work correctly" />
+
+        <TextView
+            android:id="@+id/permission_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="60dp"
+            android:layout_below="@+id/permission_text"
+            android:textSize="18dp"
+            android:text="Read Contacts\n\nModify Storage" />
+
+        <ImageView
+            android:id="@+id/permission_thumb"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/thumb_up"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:visibility="gone"/>
+        
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/md_white_1000"
+            android:text="Next"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

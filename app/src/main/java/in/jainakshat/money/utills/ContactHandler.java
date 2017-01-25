@@ -1,16 +1,27 @@
 package in.jainakshat.money.utills;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 
 import java.util.ArrayList;
 
+import in.jainakshat.money.MainApplication;
 import in.jainakshat.money.db.DBHelper;
 import in.jainakshat.money.db.models.ContactModel;
 import in.jainakshat.money.db.tables.ContactTable;
+import in.jainakshat.money.mainactivity.MainActivity;
+
+import static android.support.v4.app.ActivityCompat.requestPermissions;
+import static in.jainakshat.money.MainApplication.REQUEST_CODE_ASK_PERMISSIONS;
+
 
 /**
  * Created by Akshat on 4/28/2016.
@@ -18,7 +29,6 @@ import in.jainakshat.money.db.tables.ContactTable;
 public class ContactHandler {
 
     public static void updateContacts(Context context) {
-
         ContactTable.deleteAllRows(DBHelper.getInstance(context));
 
         Cursor c = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+" DESC");

@@ -8,6 +8,8 @@ import android.app.Application;
  */
 public class MainApplication extends Application {
 
+    public static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
     @Override
     public void onCreate() {
         super.onCreate();

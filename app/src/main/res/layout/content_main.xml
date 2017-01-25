@@ -28,6 +28,14 @@
             android:padding="5dp"
             android:visibility="visible">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Long press any contact"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"/>
+
             <SearchView
                 android:id="@+id/contact_search_view"
                 android:layout_width="wrap_content"
@@ -60,13 +68,12 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_margin="10dp"
                     android:id="@+id/bottom_bar_layout_add_amount"
                     android:inputType="phone"
                     android:textColorHint="@color/md_black_1000"
                     android:textSize="15dp"
-                    android:background="@android:color/transparent"
                     android:hint="Amount"/>
 
                 <Spinner
@@ -76,13 +83,6 @@
                     android:layout_margin="10dp"
                     android:id="@+id/bottom_bar_layout_add_type"
                     android:textSize="15dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/check"
-                    android:visibility="invisible"/>
 
             </LinearLayout>
 
@@ -106,7 +106,6 @@
                     android:id="@+id/bottom_bar_layout_add_description"
                     android:textColorHint="@color/md_black_1000"
                     android:textSize="15dp"
-                    android:background="@android:color/transparent"
                     android:hint="Description"/>
 
                 <ImageView

@@ -3,13 +3,15 @@ package in.jainakshat.money.mainactivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -48,8 +50,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 
 import in.jainakshat.money.R;
@@ -58,10 +58,14 @@ import in.jainakshat.money.db.models.ContactModel;
 import in.jainakshat.money.db.models.HistoryModel;
 import in.jainakshat.money.db.tables.ContactTable;
 import in.jainakshat.money.db.tables.HistoryTable;
+import in.jainakshat.money.permissionactivity.PermissionActivity;
 import in.jainakshat.money.preferencesmanager.MoneyPreferenceManager;
 import in.jainakshat.money.restoreactivity.RestoreActivity;
 import in.jainakshat.money.transactionhistoryactivity.TransactionHistoryActivity;
 import in.jainakshat.money.utills.ContactHandler;
+import in.jainakshat.money.utills.PermissionHandler;
+
+import static in.jainakshat.money.MainApplication.REQUEST_CODE_ASK_PERMISSIONS;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
@@ -225,8 +229,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume() {
+        if(!PermissionHandler.checkPermission(getBaseContext())) {
+            startActivity(new Intent(getBaseContext(), PermissionActivity.class));
+            finish();
+        }
         mContacts_array = ContactTable.getContacts(DBHelper.getInstance(getBaseContext()));
         mRecyclerViewAdapter.setData(mContacts_array);
         super.onResume();
@@ -462,6 +471,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    ContactHandler.updateContacts(getBaseContext());
+                } else {
+                    // Permission Denied
+                    Toast.makeText(MainActivity.this, "READ_CONTACTS Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
