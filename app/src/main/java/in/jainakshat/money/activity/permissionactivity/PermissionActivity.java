@@ -1,4 +1,4 @@
-package in.jainakshat.money.permissionactivity;
+package in.jainakshat.money.activity.permissionactivity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,10 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import in.jainakshat.money.R;
-import in.jainakshat.money.mainactivity.MainActivity;
+import in.jainakshat.money.activity.loginactivity.LoginActivity;
+import in.jainakshat.money.activity.mainactivity.MainActivity;
 import in.jainakshat.money.utills.PermissionHandler;
 
-import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static in.jainakshat.money.MainApplication.REQUEST_CODE_ASK_PERMISSIONS;
 
 /**
@@ -44,7 +43,7 @@ public class PermissionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
         if(PermissionHandler.checkPermission(getBaseContext())) {
-            startActivity(new Intent(getBaseContext(), MainActivity.class));
+            startActivity(new Intent(getBaseContext(), LoginActivity.class));
             finish();
         }
         Typeface karla_font = Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Karla-Regular.ttf");

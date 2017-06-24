@@ -1,4 +1,4 @@
-package in.jainakshat.money.restoreactivity;
+package in.jainakshat.money.activity.restoreactivity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -28,7 +28,7 @@ import java.util.Date;
 
 import in.jainakshat.money.R;
 import in.jainakshat.money.db.DBHelper;
-import in.jainakshat.money.mainactivity.MainActivity;
+import in.jainakshat.money.activity.mainactivity.MainActivity;
 
 /**
  * Created by Akshat on 5/18/2016.

@@ -1,4 +1,4 @@
-package in.jainakshat.money.mainactivity;
+package in.jainakshat.money.activity.mainactivity;
 
 import android.content.Context;
 import android.graphics.Typeface;

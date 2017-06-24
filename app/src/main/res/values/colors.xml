@@ -303,6 +303,17 @@
     <color name="md_black_1000">#000000</color>
     <color name="md_white_1000">#ffffff</color>
 
+    <!--black-->
+    <color name="md_black_100">#1A000000</color>
+    <color name="md_black_200">#33000000</color>
+    <color name="md_black_300">#4D000000</color>
+    <color name="md_black_400">#66000000</color>
+    <color name="md_black_500">#80000000</color>
+    <color name="md_black_600">#99000000</color>
+    <color name="md_black_700">#B3000000</color>
+    <color name="md_black_800">#CC000000</color>
+    <color name="md_black_900">#E6000000</color>
+
     <!--blue grey-->
     <color name="md_blue_grey_50">#ECEFF1</color>
     <color name="md_blue_grey_100">#CFD8DC</color>

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingTop="1dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".restoreactivity.RestoreActivity"
+    tools:context=".activity.restoreactivity.RestoreActivity"
     tools:showIn="@layout/activity_restoredb">
 
     <RelativeLayout

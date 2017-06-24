@@ -16,6 +16,9 @@
 
     <string name="action_settings">Settings</string>
 
+    <!--<string name="api_base_url">http://localhost:8080/api/</string>-->
+    <string name="api_base_url">https://arcane-garden-50514.herokuapp.com/api/</string>
+
     // Google Drive Credentials
     <string name="google_app_id">801933360476-44fg0jlvaovg2p6kfmvo3sauk2grf1nv.apps.googleusercontent.com</string>
     <string name="api_key">AIzaSyCKpGNoWCeOMSpLA-ZCY98l9erzu457M9Y</string>

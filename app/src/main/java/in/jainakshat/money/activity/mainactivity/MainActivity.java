@@ -1,4 +1,4 @@
-package in.jainakshat.money.mainactivity;
+package in.jainakshat.money.activity.mainactivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -58,10 +58,10 @@ import in.jainakshat.money.db.models.ContactModel;
 import in.jainakshat.money.db.models.HistoryModel;
 import in.jainakshat.money.db.tables.ContactTable;
 import in.jainakshat.money.db.tables.HistoryTable;
-import in.jainakshat.money.permissionactivity.PermissionActivity;
+import in.jainakshat.money.activity.permissionactivity.PermissionActivity;
 import in.jainakshat.money.preferencesmanager.MoneyPreferenceManager;
-import in.jainakshat.money.restoreactivity.RestoreActivity;
-import in.jainakshat.money.transactionhistoryactivity.TransactionHistoryActivity;
+import in.jainakshat.money.activity.restoreactivity.RestoreActivity;
+import in.jainakshat.money.activity.transactionhistoryactivity.TransactionHistoryActivity;
 import in.jainakshat.money.utills.ContactHandler;
 import in.jainakshat.money.utills.PermissionHandler;
 

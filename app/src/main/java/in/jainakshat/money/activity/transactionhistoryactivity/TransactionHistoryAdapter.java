@@ -1,4 +1,4 @@
-package in.jainakshat.money.transactionhistoryactivity;
+package in.jainakshat.money.activity.transactionhistoryactivity;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import in.jainakshat.money.R;
 import in.jainakshat.money.db.models.HistoryModel;

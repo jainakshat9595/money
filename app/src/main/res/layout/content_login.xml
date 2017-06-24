@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_back">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/md_black_700"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/login_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md_white_1000"
+            android:textSize="30sp"
+            android:text="Enter Your Phone Number to Continue.."/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_weight="4"
+        android:background="@color/md_black_700"
+        android:orientation="horizontal"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="30dp">
+
+        <EditText
+            android:id="@+id/login_et"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:hint="Phone Number"
+            android:textColorHint="@color/md_blue_grey_500"
+            android:textColor="@color/md_white_1000"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="7dp"
+            android:inputType="phone"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/et_back_round"/>
+
+        <ImageButton
+            android:id="@+id/login_next"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/circle_shape"
+            android:src="@drawable/arrow_right_thick"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".transactionhistoryactivity.TransactionHistoryActivity">
+    tools:context=".activity.transactionhistoryactivity.TransactionHistoryActivity">
 
     <item
         android:id="@+id/reset_contact"

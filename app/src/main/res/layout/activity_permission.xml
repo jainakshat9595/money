@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".permissionactivity.PermissionActivity">
+    tools:context=".activity.permissionactivity.PermissionActivity">
 
     <include layout="@layout/content_permission" />
 

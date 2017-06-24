@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".permissionactivity.PermissionActivity"
+        <activity android:name=".activity.permissionactivity.PermissionActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -25,9 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:label="@string/app_name"  android:name=".mainactivity.MainActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:label="@string/app_name" android:name=".transactionhistoryactivity.TransactionHistoryActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:label="@string/app_name" android:name=".restoreactivity.RestoreActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/app_name"  android:name=".activity.loginactivity.LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:label="@string/app_name"  android:name=".activity.loginactivity.LoginPasswordActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:label="@string/app_name"  android:name=".activity.loginactivity.LoginRegisterActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:label="@string/app_name"  android:name=".activity.mainactivity.MainActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:label="@string/app_name" android:name=".activity.transactionhistoryactivity.TransactionHistoryActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/app_name" android:name=".activity.restoreactivity.RestoreActivity" android:theme="@style/AppTheme.NoActionBar"/>
 
 
         <meta-data

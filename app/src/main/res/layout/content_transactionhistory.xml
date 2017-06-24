@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingTop="1dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".transactionhistoryactivity.TransactionHistoryActivity"
+    tools:context=".activity.transactionhistoryactivity.TransactionHistoryActivity"
     tools:showIn="@layout/activity_transactionhistory">
 
     <RelativeLayout

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".restoreactivity.RestoreActivity">
+    tools:context=".activity.restoreactivity.RestoreActivity">
 
     <item
         android:id="@+id/delete_all_backup"
