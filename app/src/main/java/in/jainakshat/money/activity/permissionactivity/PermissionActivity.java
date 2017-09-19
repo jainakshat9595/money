@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import in.jainakshat.money.R;
 import in.jainakshat.money.activity.loginactivity.LoginActivity;
+import in.jainakshat.money.activity.loginactivity.LoginRegisterActivity;
 import in.jainakshat.money.activity.mainactivity.MainActivity;
 import in.jainakshat.money.utills.PermissionHandler;
 
@@ -43,7 +44,7 @@ public class PermissionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
         if(PermissionHandler.checkPermission(getBaseContext())) {
-            startActivity(new Intent(getBaseContext(), LoginActivity.class));
+            startActivity(new Intent(getBaseContext(), LoginRegisterActivity.class));
             finish();
         }
         Typeface karla_font = Typeface.createFromAsset(getBaseContext().getAssets(), "fonts/Karla-Regular.ttf");
